@@ -12,20 +12,21 @@ public class Mastermind {
         this.attempts = new Attempt[MAX_ATTEMPTS];
 
         for(int i = 0; i < MAX_ATTEMPTS; i++) {
-            attempts[i] = new Attempt(i+1, player);
+            attempts[i] = new Attempt(player, this.secretCombination);
         }
     }
 
     public void play() {
         Console console = new Console();
         console.out("----- MASTERMIND -----\n");
-        for(Attempt attempt: attempts) {
+        for(int i = 0; i < MAX_ATTEMPTS; i++) {
+            Attempt attempt = this.attempts[i];
             console.out("\n\n");
-            console.out(attempt.getAttemptNumber() + " attempt(s)\n");
+            console.out(i+1 + " attempt(s)\n");
             console.out("xxxx\n");
             printPlayedAttempts();
             attempt.execute();
-            if(isSecretCombination(attempt.getCombination())) {
+            if(attempt.isSucessful()) {
                 console.out("You've won!!! ;-)\n");
                 resume();
                 return;
@@ -36,10 +37,8 @@ public class Mastermind {
     }
 
     public void resume() {
-        Console console = new Console();
-        console.out("RESUME? (y/n):\n");
-        String resume = console.inString();
-        if(resume.toLowerCase().equals("y")) {
+        boolean resume = this.player.resume();
+        if(resume == true) {
             this.play();
         }
     }
@@ -49,18 +48,9 @@ public class Mastermind {
     }
 
     private void printPlayedAttempts() {
-        WhiteBlackCombinationComparator comparator = new WhiteBlackCombinationComparator(this.secretCombination);
-        Console console = new Console();
         for(Attempt attempt: attempts) {
-            Combination combination = attempt.getCombination();
-            if(combination != null) {
-                console.out(attempt.getCombination().getCombinationText() + " --> " + comparator.getBlacks(combination) + " blacks and " + comparator.getWhites(combination) + " whites\n");
-            }
+            attempt.printResult();
         }
-    }
-
-    private boolean isSecretCombination(Combination proposedCombination) {
-        return proposedCombination.equals(secretCombination);
     }
 
 }

@@ -15,4 +15,14 @@ public class Player {
 
         return new Combination(proposedCombination);
     }
+
+    public boolean resume() {
+        Console console = new Console();
+        console.out("RESUME? (y/n):\n");
+        String resume = console.inString();
+        if(resume.toLowerCase().equals("y")) {
+            return true;
+        }
+        return false;
+    }
 }

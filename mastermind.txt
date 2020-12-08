@@ -1,0 +1,59 @@
+@startuml
+
+class Mastermind {
+    void play()
+    void resume()
+}
+
+class Player {
+    Combination proposeCombination()
+    boolean resume()
+}
+
+
+class Attempt {
+    Attempt(Player player, Combination secretCombination)
+    void execute()
+    boolean isSuccessful()
+    void printResult()
+}
+
+class Combination {
+    Combination(String combinationText)
+    Combination()
+    String getCombinationText()
+    static boolean isValid(String combinationText)
+    boolean equals(combination)
+}
+
+class WhiteBlackCombinationComparator {
+    WhiteBlackCombinationComparator(Combination combination)
+    int getWhites(Combination combination)
+    int getBlacks(Combination combination)
+}
+
+class Console {
+
+}
+
+enum Color {
+    static Color getColor(char character)
+    static boolean isCorrectColor(char character)
+}
+
+
+Mastermind *-- Player
+Mastermind *-- "1..n" Attempt
+Mastermind *-- Combination
+Mastermind ..> WhiteBlackCombinationComparator
+
+Attempt --> Player
+Attempt --> Combination
+
+Player ..> Console
+Mastermind ..> Console
+
+Combination ..> Color
+Player ..> Color
+
+@enduml

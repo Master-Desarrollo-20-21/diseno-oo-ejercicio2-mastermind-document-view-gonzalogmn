@@ -1,23 +1,27 @@
 public class Attempt {
-    private int attemptNumber;
     private Player player;
     private Combination combination;
+    private Combination secretCombination;
 
-    public Attempt(int attemptNumber, Player player) {
-        this.attemptNumber = attemptNumber;
+    public Attempt(Player player, Combination secretCombination) {
         this.player = player;
+        this.secretCombination = secretCombination;
     }
 
     public void execute() {
         this.combination = this.player.proposeCombination();
     }
 
-    public Combination getCombination() {
-        return this.combination;
+    public boolean isSucessful() {
+        return this.combination != null && this.combination.equals(this.secretCombination);
     }
 
-    public int getAttemptNumber() {
-        return this.attemptNumber;
+    public void printResult() {
+        WhiteBlackCombinationComparator comparator = new WhiteBlackCombinationComparator(this.secretCombination);
+        Console console = new Console();
+        if(this.combination != null) {
+            console.out(this.combination.getCombinationText() + " --> " + comparator.getBlacks(combination) + " blacks and " + comparator.getWhites(combination) + " whites\n");
+        }
     }
 
 }

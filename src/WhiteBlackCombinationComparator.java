@@ -1,8 +1,8 @@
 public class WhiteBlackCombinationComparator {
-    private Combination privateCombination;
+    private Combination combination;
 
-    public WhiteBlackCombinationComparator(Combination privateCombination) {
-        this.privateCombination = privateCombination;
+    public WhiteBlackCombinationComparator(Combination combination) {
+        this.combination = combination;
     }
 
     public int getWhites(Combination combination) {
