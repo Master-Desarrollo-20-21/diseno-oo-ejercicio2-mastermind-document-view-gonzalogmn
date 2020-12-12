@@ -22,7 +22,7 @@ public class Attempt {
         WhiteBlackCombinationComparator comparator = new WhiteBlackCombinationComparator(this.secretCombination);
         Console console = new Console();
         if(this.combination != null) {
-            console.out(this.combination.getCombinationText() + " --> " + comparator.getBlacks(combination) + " blacks and " + comparator.getWhites(combination) + " whites\n");
+            Console.getInstance().writeln(this.combination.getCombinationText() + " --> " + comparator.getBlacks(combination) + " blacks and " + comparator.getWhites(combination) + " whites");
         }
     }
 

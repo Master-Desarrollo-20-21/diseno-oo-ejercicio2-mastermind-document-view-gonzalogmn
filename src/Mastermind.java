@@ -1,40 +1,34 @@
 import utils.Console;
 
 public class Mastermind {
-    public static final int MAX_ATTEMPTS = 15;
+    public static final int MAX_ATTEMPTS = 10;
 
     private Player player;
     private Attempt[] attempts;
     private Combination secretCombination;
 
     public Mastermind() {
-        this.player = new Player();
-        this.secretCombination = new Combination();
-        new Console().out("Secret combination! : " + this.secretCombination.getCombinationText() + "\n");
-        this.attempts = new Attempt[MAX_ATTEMPTS];
-
-        for(int i = 0; i < MAX_ATTEMPTS; i++) {
-            attempts[i] = new Attempt(player, this.secretCombination);
-        }
+        this.reset();
     }
 
     public void play() {
-        Console console = new Console();
-        console.out("----- MASTERMIND -----\n");
+        this.reset();
+        Console.getInstance().writeln(Message.SECRET_COMBINATION_TITLE + " " + this.secretCombination.getCombinationText());
+        Message.TITLE.writeln();
         for(int i = 0; i < MAX_ATTEMPTS; i++) {
             Attempt attempt = this.attempts[i];
-            console.out("\n\n");
-            console.out(i+1 + " attempt(s)\n");
-            console.out("xxxx\n");
+            Message.LINE_BREAK.writeln();
+            Console.getInstance().writeln(String.valueOf(i+1) + " " + Message.ATTEMPTS);
+            Message.SECRET_COMBINATION.writeln();
             printPlayedAttempts();
             attempt.execute();
             if(attempt.isSucessful()) {
-                console.out("You've won!!! ;-)\n");
+                Message.WIN.writeln();
                 resume();
                 return;
             }
         }
-        console.out("You've lost!!! :-(");
+        Message.LOSE.writeln();
         resume();
     }
 
@@ -52,6 +46,16 @@ public class Mastermind {
     private void printPlayedAttempts() {
         for(Attempt attempt: attempts) {
             attempt.printResult();
+        }
+    }
+
+    private void reset() {
+        this.player = new Player();
+        this.secretCombination = new Combination();
+        this.attempts = new Attempt[MAX_ATTEMPTS];
+
+        for(int i = 0; i < MAX_ATTEMPTS; i++) {
+            attempts[i] = new Attempt(player, this.secretCombination);
         }
     }
 
