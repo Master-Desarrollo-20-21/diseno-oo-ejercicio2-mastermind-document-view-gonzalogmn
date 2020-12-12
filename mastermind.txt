@@ -32,7 +32,7 @@ class WhiteBlackCombinationComparator {
     int getBlacks(Combination combination)
 }
 
-class Console {
+class utils.Console {
 
 }
 
@@ -50,8 +50,8 @@ Mastermind ..> WhiteBlackCombinationComparator
 Attempt --> Player
 Attempt --> Combination
 
-Player ..> Console
-Mastermind ..> Console
+Player ..> utils.Console
+Mastermind ..> utils.Console
 
 Combination ..> Color
 Player ..> Color

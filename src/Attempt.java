@@ -1,3 +1,5 @@
+import utils.Console;
+
 public class Attempt {
     private Player player;
     private Combination combination;

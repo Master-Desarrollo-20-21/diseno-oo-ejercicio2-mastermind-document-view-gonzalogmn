@@ -1,3 +1,5 @@
+import utils.Console;
+
 public class Mastermind {
     public static final int MAX_ATTEMPTS = 15;
 
