@@ -3,6 +3,11 @@
 class Mastermind {
     void play()
     void resume()
+    void main(String[] args)
+}
+
+class Game {
+    void play()
 }
 
 class Player {
@@ -32,7 +37,7 @@ class WhiteBlackCombinationComparator {
     int getBlacks(Combination combination)
 }
 
-class utils.Console {
+class Console {
 
 }
 
@@ -43,15 +48,19 @@ enum Color {
 
 
 Mastermind *-- Player
-Mastermind *-- "1..n" Attempt
-Mastermind *-- Combination
-Mastermind ..> WhiteBlackCombinationComparator
+Mastermind *-- Game
 
+Game *-- "1..n" Attempt
+Game *-- Combination
+Game ..> Player
+Game ..> Console
+
+Attempt ..> WhiteBlackCombinationComparator
 Attempt --> Player
 Attempt --> Combination
 
-Player ..> utils.Console
-Mastermind ..> utils.Console
+Player ..> Console
+Mastermind ..> Console
 
 Combination ..> Color
 Player ..> Color
