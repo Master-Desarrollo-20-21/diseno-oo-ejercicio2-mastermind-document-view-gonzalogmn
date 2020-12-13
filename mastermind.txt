@@ -8,6 +8,7 @@ class Mastermind {
 
 class Game {
     void play()
+    boolean toResume()
 }
 
 class Player {
@@ -47,12 +48,11 @@ enum Color {
 }
 
 
-Mastermind *-- Player
 Mastermind *-- Game
 
 Game *-- "1..n" Attempt
 Game *-- Combination
-Game ..> Player
+Game *-- Player
 Game ..> Console
 
 Attempt ..> WhiteBlackCombinationComparator

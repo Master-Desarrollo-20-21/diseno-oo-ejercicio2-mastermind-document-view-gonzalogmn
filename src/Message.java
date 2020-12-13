@@ -9,8 +9,7 @@ public enum Message {
     WIN("You've won!!! ;-)"),
     LOSE("You've lost!!! :-("),
     PROPOSE_COMBINATION("Propose a combination:"),
-    RESUME("Do you want to continue"),
-    EMPTY("");
+    RESUME("Do you want to continue");
 
 
     private String message;

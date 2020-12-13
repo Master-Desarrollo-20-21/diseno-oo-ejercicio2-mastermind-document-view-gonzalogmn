@@ -5,8 +5,10 @@ public class    Game {
 
     private Attempt[] attempts;
     private Combination secretCombination;
+    private Player player;
 
-    public Game(Player player) {
+    public Game() {
+        this.player = new Player();
         this.secretCombination = new Combination();
         this.attempts = new Attempt[MAX_ATTEMPTS];
 
@@ -31,6 +33,10 @@ public class    Game {
             }
         }
         Message.LOSE.writeln();
+    }
+
+    public boolean toResume() {
+        return this.player.resume();
     }
 
     private void printPlayedAttempts() {
