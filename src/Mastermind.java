@@ -1,34 +1,16 @@
-import utils.Console;
-
 public class Mastermind {
-    public static final int MAX_ATTEMPTS = 10;
 
+    private Game game;
     private Player player;
-    private Attempt[] attempts;
-    private Combination secretCombination;
 
     public Mastermind() {
-        this.reset();
+        player = new Player();
+        this.game = new Game(player);
     }
 
     public void play() {
-        this.reset();
-        Console.getInstance().writeln(Message.SECRET_COMBINATION_TITLE + " " + this.secretCombination.getCombinationText());
-        Message.TITLE.writeln();
-        for(int i = 0; i < MAX_ATTEMPTS; i++) {
-            Attempt attempt = this.attempts[i];
-            Message.LINE_BREAK.writeln();
-            Console.getInstance().writeln(String.valueOf(i+1) + " " + Message.ATTEMPTS);
-            Message.SECRET_COMBINATION.writeln();
-            printPlayedAttempts();
-            attempt.execute();
-            if(attempt.isSucessful()) {
-                Message.WIN.writeln();
-                resume();
-                return;
-            }
-        }
-        Message.LOSE.writeln();
+        this.game = new Game(player);
+        this.game.play();
         resume();
     }
 
@@ -37,26 +19,11 @@ public class Mastermind {
         if(resume == true) {
             this.play();
         }
+
     }
 
     public static void main(String[] args) {
         new Mastermind().play();
-    }
-
-    private void printPlayedAttempts() {
-        for(Attempt attempt: attempts) {
-            attempt.printResult();
-        }
-    }
-
-    private void reset() {
-        this.player = new Player();
-        this.secretCombination = new Combination();
-        this.attempts = new Attempt[MAX_ATTEMPTS];
-
-        for(int i = 0; i < MAX_ATTEMPTS; i++) {
-            attempts[i] = new Attempt(player, this.secretCombination);
-        }
     }
 
 }
