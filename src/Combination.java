@@ -1,3 +1,5 @@
+import utils.Console;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -19,7 +21,11 @@ public class Combination {
     }
 
     public String getCombinationText() {
-        return Arrays.toString(this.combination).toLowerCase();
+        String result = "";
+        for(Color color : this.combination) {
+            result = result + color.name();
+        }
+        return result;
     }
 
     public boolean equals(Object o) {
@@ -56,5 +62,19 @@ public class Combination {
             combination[i] = Color.values()[random.nextInt(MAX)];
         }
         return combination;
+    }
+
+    public boolean hasColor(char color) {
+        for(Color combinationColor: combination) {
+            if(combinationColor.name().toLowerCase().equals(String.valueOf(color).toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasColor(char color, int position) {
+        assert position < COMBINATION_LENGTH;
+        return combination[position].name().toLowerCase().equals(String.valueOf(color).toLowerCase());
     }
 }
