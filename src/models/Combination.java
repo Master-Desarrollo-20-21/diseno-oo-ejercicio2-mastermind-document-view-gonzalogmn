@@ -1,4 +1,4 @@
-import utils.Console;
+package models;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -14,10 +14,6 @@ public class Combination {
 
     public Combination() {
         this.combination = getRandomCombination();
-    }
-
-    public static boolean isValid(String combinationText) {
-        return combinationText.length() == COMBINATION_LENGTH && hasCombinationTextCorrectColors(combinationText);
     }
 
     public String getCombinationText() {
@@ -47,6 +43,11 @@ public class Combination {
     public boolean hasColor(char color, int position) {
         assert position < COMBINATION_LENGTH;
         return combination[position].name().toLowerCase().equals(String.valueOf(color).toLowerCase());
+    }
+
+
+    public static boolean isValid(String combinationText) {
+        return combinationText.length() == COMBINATION_LENGTH && hasCombinationTextCorrectColors(combinationText);
     }
 
     private static boolean hasCombinationTextCorrectColors(String combinationText) {

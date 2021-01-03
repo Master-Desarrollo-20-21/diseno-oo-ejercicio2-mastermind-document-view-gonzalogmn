@@ -1,8 +1,9 @@
+package views;
+
 import utils.Console;
 
 public enum Message {
     TITLE("--- MASTERMIND ---"),
-    SECRET_COMBINATION_TITLE("Secret combination! : "),
     LINE_BREAK("\n"),
     ATTEMPTS("attempt(s)"),
     SECRET_COMBINATION("xxxx"),
@@ -14,15 +15,15 @@ public enum Message {
 
     private String message;
 
-    private Message(String message) {
+    Message(String message) {
         this.message = message;
     }
 
-    void write() {
+    public void write() {
         Console.getInstance().write(this.message);
     }
 
-    void writeln() {
+    public void writeln() {
         Console.getInstance().writeln(this.message);
     }
 

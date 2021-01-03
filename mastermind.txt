@@ -6,27 +6,27 @@ class Mastermind {
     void main(String[] args)
 }
 
-class Game {
+class models.Game {
     void play()
     boolean toResume()
 }
 
-class Player {
-    Combination proposeCombination()
+class models.Player {
+    models.Combination proposeCombination()
     boolean resume()
 }
 
 
-class Attempt {
-    Attempt(Player player, Combination secretCombination)
+class models.Attempt {
+    models.Attempt(models.Player player, models.Combination secretCombination)
     void execute()
     boolean isSuccessful()
     void printResult()
 }
 
-class Combination {
-    Combination(String combinationText)
-    Combination()
+class models.Combination {
+    models.Combination(String combinationText)
+    models.Combination()
     String getCombinationText()
     boolean hasColor(char color)
     boolean hasColor(char color, int position)
@@ -34,37 +34,37 @@ class Combination {
     boolean equals(combination)
 }
 
-class WhiteBlackCombinationComparator {
-    WhiteBlackCombinationComparator(Combination combination)
-    int getWhites(Combination combination)
-    int getBlacks(Combination combination)
+class models.WhiteBlackResult {
+    models.WhiteBlackResult(models.Combination combination)
+    int getWhites(models.Combination combination)
+    int getBlacks(models.Combination combination)
 }
 
 class Console {
 
 }
 
-enum Color {
-    static Color getColor(char character)
+enum models.Color {
+    static models.Color getColor(char character)
     static boolean isCorrectColor(char character)
 }
 
 
-Mastermind *-- Game
+Mastermind *-- models.Game
 
-Game *-- "1..n" Attempt
-Game *-- Combination
-Game *-- Player
-Game ..> Console
+models.Game *-- "1..n" models.Attempt
+models.Game *-- models.Combination
+models.Game *-- models.Player
+models.Game ..> Console
 
-Attempt ..> WhiteBlackCombinationComparator
-Attempt --> Player
-Attempt --> Combination
+models.Attempt ..> models.WhiteBlackResult
+models.Attempt --> models.Player
+models.Attempt --> models.Combination
 
-Player ..> Console
+models.Player ..> Console
 Mastermind ..> Console
 
-Combination ..> Color
-Player ..> Color
+models.Combination ..> models.Color
+models.Player ..> models.Color
 
 @enduml

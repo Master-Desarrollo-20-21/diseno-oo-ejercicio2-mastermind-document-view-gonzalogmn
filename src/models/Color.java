@@ -1,3 +1,5 @@
+package models;
+
 public enum Color {
     r, y, b, g, p, o;
 

@@ -1,10 +1,14 @@
+package views;
+
+import models.Color;
+import models.Combination;
 import utils.Console;
-import utils.YesNoDialog;
 
 import java.util.Arrays;
 
-public class Player {
-    public Combination proposeCombination() {
+public class PlayerView {
+
+    public Combination interact() {
         Console console = Console.getInstance();
         String proposedCombination;
         do {
@@ -12,14 +16,10 @@ public class Player {
             proposedCombination = console.readString();
             console.writeln(proposedCombination);
             if(!Combination.isValid(proposedCombination)) {
-                console.writeln("Combination should have " + Combination.COMBINATION_LENGTH + " characters and colors must be " + Arrays.toString(Color.values()).toLowerCase());
+                console.writeln("models.Combination should have " + Combination.COMBINATION_LENGTH + " characters and colors must be " + Arrays.toString(Color.values()).toLowerCase());
             }
         } while(!Combination.isValid(proposedCombination));
 
         return new Combination(proposedCombination);
-    }
-
-    public boolean resume() {
-        return new YesNoDialog().read(Message.RESUME.toString());
     }
 }
