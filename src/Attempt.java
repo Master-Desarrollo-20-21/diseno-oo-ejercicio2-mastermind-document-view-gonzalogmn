@@ -20,7 +20,6 @@ public class Attempt {
 
     public void printResult() {
         WhiteBlackCombinationComparator comparator = new WhiteBlackCombinationComparator(this.secretCombination);
-        Console console = new Console();
         if(this.combination != null) {
             Console.getInstance().writeln(this.combination.getCombinationText() + " --> " + comparator.getBlacks(combination) + " blacks and " + comparator.getWhites(combination) + " whites");
         }

@@ -35,6 +35,20 @@ public class Combination {
         return Arrays.equals(combination, that.combination);
     }
 
+    public boolean hasColor(char color) {
+        for(Color combinationColor: combination) {
+            if(combinationColor.name().toLowerCase().equals(String.valueOf(color).toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasColor(char color, int position) {
+        assert position < COMBINATION_LENGTH;
+        return combination[position].name().toLowerCase().equals(String.valueOf(color).toLowerCase());
+    }
+
     private static boolean hasCombinationTextCorrectColors(String combinationText) {
         for(char character : combinationText.toCharArray()) {
             if(!Color.isCorrectColor(character)) {
@@ -62,19 +76,5 @@ public class Combination {
             combination[i] = Color.values()[random.nextInt(MAX)];
         }
         return combination;
-    }
-
-    public boolean hasColor(char color) {
-        for(Color combinationColor: combination) {
-            if(combinationColor.name().toLowerCase().equals(String.valueOf(color).toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean hasColor(char color, int position) {
-        assert position < COMBINATION_LENGTH;
-        return combination[position].name().toLowerCase().equals(String.valueOf(color).toLowerCase());
     }
 }

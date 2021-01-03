@@ -28,6 +28,8 @@ class Combination {
     Combination(String combinationText)
     Combination()
     String getCombinationText()
+    boolean hasColor(char color)
+    boolean hasColor(char color, int position)
     static boolean isValid(String combinationText)
     boolean equals(combination)
 }
