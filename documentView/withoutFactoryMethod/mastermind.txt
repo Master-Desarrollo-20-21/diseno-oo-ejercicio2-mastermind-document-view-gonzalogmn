@@ -1,0 +1,122 @@
+@startuml
+
+class Mastermind {
+    void play()
+    void resume()
+    void main(String[] args)
+}
+
+package models {
+
+    class Game {
+        int getMaxAttempts()
+        Attempt getAttempt(int i)
+    }
+
+    class Attempt {
+        Attempt(Player player, Combination secretCombination)
+        void setCinbination(Combination combination)
+        boolean isSuccessful()
+        boolean hasBeenExecuted()
+        WhiteBlackResult getResult()
+        String getCombinationText()
+    }
+
+    class Combination {
+        Combination(String combinationText)
+        Combination()
+        String getCombinationText()
+        boolean hasColor(char color)
+        boolean hasColor(char color, int position)
+        static boolean isValid(String combinationText)
+        boolean equals(combination)
+    }
+
+    class WhiteBlackResult {
+        WhiteBlackResult(Combination combination)
+        int getWhites(Combination combination)
+        int getBlacks(Combination combination)
+    }
+
+
+
+    enum Color {
+        static Color getColor(char character)
+        static boolean isCorrectColor(char character)
+    }
+
+}
+
+package utils {
+    class Console {
+
+    }
+
+    class YesNoDialog {
+
+    }
+}
+
+
+package Views {
+    abstract class WithGameView {
+        Game game;
+        WithGameView(Game game);
+    }
+
+    enum Message {}
+
+    class AttemptView extends WithGameView {
+        void interact()
+        boolean isSuccessful()
+    }
+
+    class PlayerView {
+        Combination interact()
+    }
+
+    class PlayView extends WithGameView {
+        void interact()
+    }
+
+    class ResumeView extends WithGameView {
+        boolean interact()
+    }
+
+    class StartView extends WithGameView {
+        void interact()
+    }
+
+    class View extends WithGameView {
+        void interact()
+        boolean toResume()
+    }
+}
+
+
+
+Mastermind *-- Game
+Mastermind *-- View
+
+Game *-- "1..n" Attempt
+Game *-- Combination
+
+Attempt ..> WhiteBlackResult
+Attempt --> "2" Combination
+WhiteBlackResult --> "2" Combination
+
+Combination ..> Color
+
+WithGameView --> Game
+
+View *-- StartView
+View *-- PlayView
+View *-- ResumeView
+
+PlayView o-- "n" AttemptView
+ResumeView ..> YesNoDialog
+
+AttemptView --> Attempt
+AttemptView ..> PlayerView
+
+@enduml
